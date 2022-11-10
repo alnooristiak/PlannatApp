@@ -1,5 +1,5 @@
 export const typography = {
-    primary: 'CormorantUnicase-Regular',
+    primary: 'XanhMono-Regular',
     primaryBlod: 'Antonio-Regular',
     bold: 'Boogaloo-Regular',
 };
