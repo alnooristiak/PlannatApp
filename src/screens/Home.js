@@ -5,6 +5,7 @@ import PlannetHeader from '../components/PlannetHeader'
 import { spacing } from '../theme/spacing'
 import { PLANET_LIST } from '../data/planet-list';
 import Text from '../components/text/text'
+import { AntDesign } from '@expo/vector-icons';
 
 const Home = () => {
   return (
@@ -19,12 +20,16 @@ const Home = () => {
           keyExtractor={(item) => item.name}
           renderItem={({ item }) => {
             return (
-              <View>
-                <View style={[styles.circle, {backgroundColor: item.color}]}></View>
-                <Text style={styles.item}>{item.name}</Text>
+              <View style={styles.dataContainer}>
+                <View style={styles.dataSecondContainer}>
+                  <View style={[styles.circle, {backgroundColor: item.color}]}></View>
+                  <Text preset='h4' style={styles.item}>{item.name}</Text>
+                </View>  
+                <AntDesign name='right' size={18} color='white' />
               </View>
             );
           }}
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
           />
         </View>
     </SafeAreaView>
@@ -34,21 +39,42 @@ const Home = () => {
 export default Home
 
 const styles = StyleSheet.create({
+
   container: {
     marginTop: spacing[7],
+    flex: 1,
+    backgroundColor: colors.black,
   },
 
   // data loding section list style 
+  dataContainer: {
+    flexDirection: "row",
+    alignItems: 'center',
+    margin: spacing[2],
+    justifyContent: 'space-between',
+  },
+  dataSecondContainer: {
+    flexDirection: "row",
+    alignItems: 'center',
+  },
   list: {
     padding: spacing[5],
   },
   circle: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
+    width: 25,
+    height: 25,
+    borderRadius: 15,
   },
   item: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    textTransform: 'uppercase',
+    marginLeft: spacing[4],
+    // flexDirection: 'row',
+    // justifyContent: 'center',
+    // padding: spacing[5],
+  },
+  separator: {
+    borderBottomColor: colors.white,
+    borderBottomWidth: 0.5,
   }
+
 })
