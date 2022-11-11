@@ -1,9 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { useFonts } from 'expo-font';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 
 import Text from './src/components/text/text';
 import { colors } from './src/theme/colors';
@@ -33,19 +33,24 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen  options={{headerShown: false,}} name="Home" component={Home}></Stack.Screen>
-      </Stack.Navigator>
-    </NavigationContainer>
+    <>
+      <NavigationContainer style={styles.container} theme={DarkTheme}>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen options={{ headerShown: false, }} name="Home" component={Home}></Stack.Screen>
+        </Stack.Navigator>
+      </NavigationContainer>
+      <StatusBar style='light' />
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  // container: {
-  //   flex: 1,
-  //   backgroundColor: '#ff9f43',
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  // },
+  container: {
+    marginTop: 30,
+    flex: 1,
+    // backgroundColor: '#ff9f43',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    color: colors.white,
+  },
 });
