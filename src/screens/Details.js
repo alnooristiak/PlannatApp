@@ -4,6 +4,7 @@ import Text from '../components/text/text'
 import { colors } from '../theme/colors'
 import PlannetHeader from '../components/PlannetHeader'
 import { spacing } from '../theme/spacing'
+import PlannetSecSmDetail from './PlannetSecSmDetail'
 
 const Details = ({ navigation, route }) => {
 
@@ -16,11 +17,14 @@ const Details = ({ navigation, route }) => {
     <View style={styles.container}>
       <PlannetHeader backBTN={true} />
       <ScrollView>
+
         <View style={[styles.circle, { backgroundColor: color }]}>
         </View>
+
         <View>
           <Text preset='h1' style={styles.nameText}>{name}</Text>
         </View>
+
         <View>
           <Text preset='h4' style={styles.descriptionText}>{description}</Text>
           <Pressable 
@@ -32,6 +36,13 @@ const Details = ({ navigation, route }) => {
               Wikipedia
             </Text>
           </Pressable>
+        </View>
+
+        <View style={styles.plannetDetailsSEC}>
+          <PlannetSecSmDetail title="ROTATION TIME" values={rotationTime} />
+          <PlannetSecSmDetail title="REVOLUTION TIME" values={revolutionTime} />
+          <PlannetSecSmDetail title="radius" values={radius} />
+          <PlannetSecSmDetail title="avgTemp" values={avgTemp} />
         </View>
       </ScrollView>
     </View>
@@ -53,7 +64,7 @@ const styles = StyleSheet.create({
     height: 200,
     borderRadius: 100,
     flexDirection: 'row',
-    // flex: 1,
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     marginVertical: spacing[9],
@@ -80,4 +91,8 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     fontWeight: 'bold',
   },
+  // plannet Details SEC
+  plannetDetailsSEC: {
+    marginTop: spacing[5],
+  }
 })
