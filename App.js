@@ -7,10 +7,11 @@ import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 
 import Text from './src/components/text/text';
 import { colors } from './src/theme/colors';
-import { spacing } from './src/theme/spacing';
-import { typography } from './src/theme/typography';
-import { preset } from './src/components/text/text.preset';
+// import { spacing } from './src/theme/spacing';
+// import { typography } from './src/theme/typography';
+// import { preset } from './src/components/text/text.preset';
 import Home from './src/screens/Home';
+import Details from './src/screens/Details';
 
 
 export default function App() {
@@ -35,8 +36,10 @@ export default function App() {
   return (
     <>
       <NavigationContainer style={styles.container} theme={DarkTheme}>
-        <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen options={{ headerShown: false, }} name="Home" component={Home}></Stack.Screen>
+        <Stack.Navigator screenOptions={{headerShow: false}}>
+          <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
+
+          <Stack.Screen options={{ headerShown: false }} name="Details" component={Details} />
         </Stack.Navigator>
       </NavigationContainer>
       <StatusBar style='light' />
