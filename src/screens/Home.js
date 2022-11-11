@@ -8,38 +8,43 @@ import Text from '../components/text/text'
 import { AntDesign } from '@expo/vector-icons';
 
 const Home = ({ navigation }) => {
+
+  // render item for reandering data 
+  const renderItem = ({ item }) => {
+    const {name, color} = item;
+    return (
+      <Pressable
+        onPress={() => navigation.navigate('Details', { planet: item })}
+        style={styles.dataContainer}
+      >
+        <View style={styles.dataSecondContainer}>
+          <View style={[styles.circle, { backgroundColor: item.color }]}></View>
+          <Text preset='h4' style={styles.item}>{item.name}</Text>
+        </View>
+        <AntDesign name='right' size={18} color='white' />
+      </Pressable>
+    );
+  };// render end
+
   return (
-    <SafeAreaView style={styles.container}>
-        <PlannetHeader />
-        <Text style={{ color: colors.white, }}>This is a page Home</Text>
-        {/* Data loging  */}
-        <View>
-          <FlatList 
+    // <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
+      <PlannetHeader />
+      <Text style={{ color: colors.white, }}>This is a page Home</Text>
+      {/* Data loging  */}
+      <View>
+        <FlatList
           contentContainerStyle={styles.list}
           data={PLANET_LIST}
           keyExtractor={(item) => item.name}
-          renderItem={({ item }) => {
 
-            return (
-              <Pressable 
-              onPress={() => navigation.navigate('Details', {planet: item})} 
-              style={styles.dataContainer}
-              >
-                <View style={styles.dataSecondContainer}>
-                  <View style={[styles.circle, {backgroundColor: item.color}]}></View>
-                  <Text preset='h4' style={styles.item}>{item.name}</Text>
-                </View>  
-                <AntDesign name='right' size={18} color='white' />
-              </Pressable>
-            );
-
-          }}
-
+          // rendering item 
+          renderItem={renderItem}
           ItemSeparatorComponent={() => <View style={styles.separator} />}
-          />
-
-        </View>
-    </SafeAreaView>
+        />
+      </View>
+    </View>
+    // </SafeAreaView>
   )
 }
 
