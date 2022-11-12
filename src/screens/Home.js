@@ -1,5 +1,5 @@
-import { FlatList, Pressable, SafeAreaView, StyleSheet, View } from 'react-native'
-import React from 'react'
+import { FlatList, Pressable, SafeAreaView, StyleSheet, TextInput, View } from 'react-native'
+import React, { useState } from 'react'
 import { colors } from '../theme/colors'
 import PlannetHeader from '../components/PlannetHeader'
 import { spacing } from '../theme/spacing'
@@ -8,6 +8,21 @@ import Text from '../components/text/text'
 import { AntDesign } from '@expo/vector-icons';
 
 const Home = ({ navigation }) => {
+
+  const [list, setList] = useState(PLANET_LIST);
+
+  // text search filter heandeler 
+  const searchFilter = (text) => {
+    const filerList = PLANET_LIST.filter(item => {
+      const itemName = item.name.toLocaleLowerCase();
+      const usertextInput = text.toLocaleLowerCase();
+
+      // -1 vale mean itemName valu & usertextInput value are same acorate 
+      return itemName.indexOf(usertextInput) > -1;
+    });
+
+    setList(filerList);
+  }; // end
 
   // render item for reandering data 
   const renderItem = ({ item }) => {
@@ -30,12 +45,19 @@ const Home = ({ navigation }) => {
     // <SafeAreaView style={styles.container}>
     <View style={styles.container}>
       <PlannetHeader />
-      <Text style={{ color: colors.white, }}>This is a page Home</Text>
+      <TextInput 
+      onChangeText={(text) => searchFilter(text)}
+      autoCorrect={false}
+      style={styles.textSearchInput} 
+      placeholder='Type The Plannet Name'
+      placeholderTextColor={colors.white}
+      />
+      {/* <Text style={{ color: colors.white, }}>This is a page Home</Text> */}
       {/* Data loging  */}
       <View>
         <FlatList
           contentContainerStyle={styles.list}
-          data={PLANET_LIST}
+          data={list}
           keyExtractor={(item) => item.name}
 
           // rendering item 
@@ -56,6 +78,15 @@ const styles = StyleSheet.create({
     marginTop: spacing[7],
     flex: 1,
     backgroundColor: colors.black,
+  },
+
+  // Text Search Input
+  textSearchInput: {
+    padding: spacing[4],
+    borderBottomColor: colors.white,
+    color: colors.white,
+    borderBottomWidth: 1,
+    margin: spacing[5],
   },
 
   // data loding section list style 
